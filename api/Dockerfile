@@ -1,11 +1,11 @@
 FROM python:3.9-alpine
 
-WORKDIR /app
-ADD . /app/
+WORKDIR /api
+ADD . /api/
 
 RUN pip install -r requirements.txt
 
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_APP=src/app.py
+ENV FLASK_APP=app.py
 
 CMD ["flask", "run"]

@@ -1,3 +1,6 @@
+requests
 flask
 redis
 youtube_dl
+bs4
+nvelope
