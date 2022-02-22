@@ -9,9 +9,8 @@ class Video(Obj):
         "title": string_conv,
         "channel": string_conv,
         "thumbnail_url": string_conv,
+        "description": string_conv,
         "length": int_conv,
-        "size": int_conv,
-        "likes": int_conv,
         "codec": string_conv,
         "disk_path": string_conv
     }
@@ -20,9 +19,8 @@ class Video(Obj):
     title: str
     channel: str
     thumbnail_url: str
+    description: str
     length: int
-    size: int
-    likes: int
     codec: str
     disk_path: str
 

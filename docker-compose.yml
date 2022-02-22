@@ -3,50 +3,19 @@ version: "3.9"
 services:
   dashboard:
     build: dashboard
-    environment:
-      - APP_PORT=3000
-      - APP_NAME=Dashboard
-    expose:
-      - 3000
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=Host(`youtube.localhost`)
+    ports:
+      - 80:3000
     volumes:
-      - ~/.youtube:/.youtube
+      - ./youtube:/youtube
 
   api:
     build: api
-    environment:
-      - APP_PORT=5000
-      - APP_NAME=API
-    expose:
-      - 5000
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.api.rule=Host(`api.localhost`)
+    ports:
+      - 5000:5000
+    links:
+      - redis
 
   redis:
-    image: redislabs/rejson
-    environment:
-      - APP_PORT=6379
-      - APP_NAME=Redis
-    expose:
-      - 6379
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.redis.rule=Host(`redis.localhost`)
+    image: redis:alpine
     volumes:
-      - ./.data:/data
-
-  traefik:
-    image: traefik:v2.3.6
-    command:
-      - --accesslog
-      - --api.insecure=true
-      - --providers.docker
-      - --providers.docker.exposedbydefault=false
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 80:80
-      - 8080:8080
+      - ./redis-data:/data
