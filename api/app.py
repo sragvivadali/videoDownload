@@ -3,9 +3,7 @@ from random import sample
 
 from flask import Flask, request
 import redis, youtube_dl
-from redis.commands.json.path import Path
 
-from lib import scrape
 from models import video
 
 app = Flask(__name__)

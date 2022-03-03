@@ -6,15 +6,13 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function FirstPicks() {
   const {data, error} = useSwr("http://localhost:5000/library", fetcher);
 
-  if (error) return (
+  if (error || !data) return (
     <article className='message is-danger'>
       <div className='message-body'>
         No songs found in your library. Go add some!
       </div>
     </article>
   )
-
-  if (!data) return <div>Loading...</div>
 
   return (
     <div className='columns'>
